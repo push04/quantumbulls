@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Icon from "@/components/ui/Icon";
 
 interface Poll {
     id: string;
@@ -33,6 +34,13 @@ export default function LivePolls({ sessionId, userId, isAdmin }: LivePollsProps
     const [results, setResults] = useState<Record<string, PollResult[]>>({});
     const [loading, setLoading] = useState(true);
     const supabase = createClient();
+
+    const loadPollResults = async (pollId: string) => {
+        const { data } = await supabase.rpc("get_poll_results", { poll_uuid: pollId });
+        if (data) {
+            setResults(prev => ({ ...prev, [pollId]: data }));
+        }
+    };
 
     // Load polls and subscribe to changes
     useEffect(() => {
@@ -100,13 +108,6 @@ export default function LivePolls({ sessionId, userId, isAdmin }: LivePollsProps
         };
     }, [sessionId, userId, supabase]);
 
-    const loadPollResults = async (pollId: string) => {
-        const { data } = await supabase.rpc("get_poll_results", { poll_uuid: pollId });
-        if (data) {
-            setResults(prev => ({ ...prev, [pollId]: data }));
-        }
-    };
-
     const vote = async (pollId: string, optionIndex: number) => {
         if (userVotes[pollId] !== undefined) return; // Already voted
 
@@ -139,7 +140,7 @@ export default function LivePolls({ sessionId, userId, isAdmin }: LivePollsProps
     return (
         <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                <span className="text-lg">📊</span>
+                <Icon name="bar-chart" size={20} className="text-[#2EBD59]" />
                 Live Poll
             </h3>
 

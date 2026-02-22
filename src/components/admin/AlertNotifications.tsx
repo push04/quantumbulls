@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { getUnreadAlerts, markAlertRead, dismissAlert, type Alert } from "@/lib/analytics/alertSystem";
 
 const SEVERITY_STYLES = {
@@ -31,20 +31,28 @@ export default function AlertNotifications() {
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [loading, setLoading] = useState(true);
     const [expanded, setExpanded] = useState(false);
-
-    const loadAlerts = useCallback(async () => {
-        const data = await getUnreadAlerts();
-        setAlerts(data);
-        setLoading(false);
-    }, []);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
+        let isMounted = true;
+
+        async function loadAlerts() {
+            const data = await getUnreadAlerts();
+            if (isMounted) {
+                setAlerts(data);
+                setLoading(false);
+                setIsInitialized(true);
+            }
+        }
+
         loadAlerts();
 
-        // Refresh every 5 minutes
         const interval = setInterval(loadAlerts, 5 * 60 * 1000);
-        return () => clearInterval(interval);
-    }, [loadAlerts]);
+        return () => {
+            isMounted = false;
+            clearInterval(interval);
+        };
+    }, []);
 
     async function handleMarkRead(alertId: string) {
         await markAlertRead(alertId);

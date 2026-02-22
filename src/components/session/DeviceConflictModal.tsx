@@ -59,7 +59,7 @@ export default function DeviceConflictModal({
 
                 {/* Description */}
                 <p className="text-gray-600 text-center mb-6">
-                    You're currently logged in on another device
+                    You&apos;re currently logged in on another device
                 </p>
 
                 {/* Session Info Card */}

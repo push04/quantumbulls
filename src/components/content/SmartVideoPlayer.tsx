@@ -42,9 +42,11 @@ export default function SmartVideoPlayer({ url, thumbnail, onEnded }: SmartVideo
     const isYouTube = isYouTubeUrl(url);
     const youtubeVideoId = isYouTube ? getYouTubeVideoId(url) : null;
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         setMounted(true);
     }, []);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);

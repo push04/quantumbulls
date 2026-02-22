@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getCategories, type ForumCategory } from "@/lib/community";
+import Icon from "@/components/ui/Icon";
 
 /**
  * Forum Categories Grid
@@ -45,7 +46,9 @@ export function ForumCategories() {
                     className="group bg-white rounded-xl border border-gray-200 p-6 hover:border-[#2EBD59] hover:shadow-md transition-all"
                 >
                     <div className="flex items-start gap-4">
-                        <div className="text-3xl">{category.icon || "💬"}</div>
+                        <div className="w-12 h-12 rounded-xl bg-[#2EBD59]/10 flex items-center justify-center group-hover:bg-[#2EBD59] transition-colors">
+                            <Icon name="chat" size={24} className="text-[#2EBD59] group-hover:text-white transition-colors" />
+                        </div>
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-gray-900 group-hover:text-[#2EBD59] transition-colors">
                                 {category.name}

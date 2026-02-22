@@ -226,7 +226,7 @@ export default function ActiveSessionsPage() {
                         <div>
                             <p className="text-sm font-medium text-blue-900">Security Tip</p>
                             <p className="text-sm text-blue-700 mt-1">
-                                If you see a device you don't recognize, log it out immediately and change your password.
+                                If you see a device you don&apos;t recognize, log it out immediately and change your password.
                             </p>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { type LiveSession } from "@/lib/live";
+import Icon from "@/components/ui/Icon";
 
 interface ChatMessage {
     id: string;
@@ -268,7 +269,7 @@ function ChatMessageItem({
                             </span>
                         )}
                         {message.is_pinned && (
-                            <span className="text-xs">📌</span>
+                            <Icon name="pin" size={12} className="text-amber-600" />
                         )}
                     </div>
                     <p className="text-sm text-gray-700 break-words">{message.message}</p>
@@ -286,9 +287,9 @@ function ChatMessageItem({
                         {!message.is_pinned && (
                             <button
                                 onClick={onPin}
-                                className="text-xs text-amber-600 hover:underline"
+                                className="text-xs text-amber-600 hover:underline flex items-center gap-1"
                             >
-                                📌 Pin
+                                <Icon name="pin" size={12} /> Pin
                             </button>
                         )}
                     </div>

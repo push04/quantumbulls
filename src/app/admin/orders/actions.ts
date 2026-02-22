@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function approveOrder(orderId: string, userId: string, metadata: any) {
+export async function approveOrder(orderId: string, userId: string, metadata: Record<string, unknown>) {
     const supabase = await createClient();
 
     // 1. Update Order Status

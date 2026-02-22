@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 interface WelcomeBackProps {
     userName: string;
     currentCourse?: {
@@ -12,23 +14,23 @@ interface WelcomeBackProps {
  * Personalized welcome back greeting
  */
 export default function WelcomeBack({ userName, currentCourse }: WelcomeBackProps) {
-    const getGreeting = () => {
+    const greeting = useMemo(() => {
         const hour = new Date().getHours();
         if (hour < 12) return 'Good morning';
         if (hour < 18) return 'Good afternoon';
         return 'Good evening';
-    };
+    }, []);
 
     const firstName = userName.split(' ')[0];
 
     return (
         <div className="mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                {getGreeting()}, {firstName}! 👋
+                {greeting}, {firstName}! 👋
             </h1>
             {currentCourse ? (
                 <p className="text-gray-600">
-                    You're <span className="font-semibold text-[#2EBD59]">{currentCourse.percentComplete}%</span> through{' '}
+                    You&apos;re <span className="font-semibold text-[#2EBD59]">{currentCourse.percentComplete}%</span> through{' '}
                     <span className="font-medium">{currentCourse.title}</span>
                 </p>
             ) : (

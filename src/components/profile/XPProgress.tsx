@@ -99,7 +99,7 @@ export default function XPProgress({
             {/* Max level */}
             {!nextLevelInfo && (
                 <div className="text-center text-sm text-gray-500">
-                    🎉 You've reached the highest level!
+                    🎉 You&apos;ve reached the highest level!
                 </div>
             )}
         </div>

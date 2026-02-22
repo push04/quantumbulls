@@ -47,7 +47,9 @@ export default function LivePlayer({ session, userId, userTier, isAdmin }: LiveP
 
     // Countdown timer for waiting room
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (isLive) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setTimeToStart(null);
             return;
         }

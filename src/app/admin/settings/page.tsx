@@ -1,6 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { updateSetting } from "./actions";
 
+interface SystemSetting {
+    key: string;
+    value: string | null;
+    description: string | null;
+}
+
 export default async function AdminSettingsPage() {
     const supabase = await createClient();
     const { data: settings } = await supabase.from("system_settings").select("*").order("key", { ascending: true });
@@ -53,7 +59,7 @@ export default async function AdminSettingsPage() {
     );
 }
 
-function SettingItem({ setting, isSecret = false, isToggle = false }: { setting: any, isSecret?: boolean, isToggle?: boolean }) {
+function SettingItem({ setting, isSecret = false, isToggle = false }: { setting: SystemSetting, isSecret?: boolean, isToggle?: boolean }) {
     return (
         <form className="p-6 flex items-start gap-6">
             <div className="flex-1">

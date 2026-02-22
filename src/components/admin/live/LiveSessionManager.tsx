@@ -289,17 +289,21 @@ function SessionForm({
     onSubmit: (data: Partial<LiveSession>) => void;
     onClose: () => void;
 }) {
-    const [formData, setFormData] = useState({
-        title: session?.title || "",
-        description: session?.description || "",
-        scheduled_at: session?.scheduled_at
+    const [formData, setFormData] = useState(() => {
+        const defaultTime = session?.scheduled_at
             ? new Date(session.scheduled_at).toISOString().slice(0, 16)
-            : new Date(Date.now() + 3600000).toISOString().slice(0, 16),
-        duration_minutes: session?.duration_minutes || 60,
-        stream_url: session?.stream_url || "",
-        stream_platform: session?.stream_platform || "youtube",
-        min_tier: session?.min_tier || "free",
-        host_name: session?.host_name || "",
+            : new Date(Date.now() + 3600000).toISOString().slice(0, 16);
+        
+        return {
+            title: session?.title || "",
+            description: session?.description || "",
+            scheduled_at: defaultTime,
+            duration_minutes: session?.duration_minutes || 60,
+            stream_url: session?.stream_url || "",
+            stream_platform: session?.stream_platform || "youtube",
+            min_tier: session?.min_tier || "free",
+            host_name: session?.host_name || "",
+        };
     });
 
     const handleSubmit = (e: React.FormEvent) => {

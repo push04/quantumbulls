@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import TestimonialCard from "@/components/testimonials/TestimonialCard";
+import Icon from "@/components/ui/Icon";
 
 interface SuccessStory {
     id: string;
@@ -33,26 +34,26 @@ export default async function SuccessStoriesPage() {
     return (
         <main className="min-h-screen bg-gray-50">
             {/* Hero */}
-            <section className="bg-gradient-to-br from-[#2EBD59] to-emerald-600 text-white py-20">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <section className="bg-gradient-to-br from-[#2EBD59] to-emerald-600 text-white py-16 md:py-20">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         Success Stories
                     </h1>
-                    <p className="text-xl text-white/80 max-w-2xl mx-auto">
+                    <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
                         Real traders, real results. See how Quantum Bull has transformed
                         the trading journey of our students.
                     </p>
                 </div>
             </section>
 
-            <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
                 {/* Featured Testimonials */}
                 {testimonials && testimonials.length > 0 && (
-                    <section className="mb-16">
+                    <section className="mb-12 md:mb-16">
                         <h2 className="text-2xl font-bold text-gray-900 mb-6">
                             What Our Students Say
                         </h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {testimonials.map((t) => (
                                 <TestimonialCard
                                     key={t.id}
@@ -79,8 +80,10 @@ export default async function SuccessStoriesPage() {
                     </h2>
 
                     {!stories || stories.length === 0 ? (
-                        <div className="text-center py-16 bg-white rounded-2xl border border-gray-200">
-                            <div className="text-4xl mb-4">📖</div>
+                        <div className="text-center py-12 md:py-16 bg-white rounded-2xl border border-gray-200">
+                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                                <Icon name="book" size={32} className="text-gray-400" />
+                            </div>
                             <h3 className="text-lg font-medium text-gray-900 mb-2">
                                 No stories yet
                             </h3>
@@ -89,14 +92,14 @@ export default async function SuccessStoriesPage() {
                             </p>
                         </div>
                     ) : (
-                        <div className="space-y-8">
+                        <div className="space-y-6 sm:space-y-8">
                             {stories.map((story: SuccessStory) => (
                                 <article
                                     key={story.id}
                                     className="bg-white rounded-2xl border border-gray-200 overflow-hidden"
                                 >
                                     {story.imageUrl && (
-                                        <div className="h-64 bg-gray-200">
+                                        <div className="h-48 sm:h-64 bg-gray-200">
                                             <img
                                                 src={story.imageUrl}
                                                 alt={story.title}
@@ -104,14 +107,14 @@ export default async function SuccessStoriesPage() {
                                             />
                                         </div>
                                     )}
-                                    <div className="p-8">
-                                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                                    <div className="p-5 sm:p-8">
+                                        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
                                             {story.title}
                                         </h3>
 
                                         {/* Before/After */}
                                         {(story.beforeStory || story.afterStory) && (
-                                            <div className="grid md:grid-cols-2 gap-6 mb-6">
+                                            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
                                                 {story.beforeStory && (
                                                     <div className="p-4 bg-red-100 rounded-xl border border-red-100">
                                                         <div className="text-sm font-medium text-red-600 mb-2">
@@ -160,9 +163,9 @@ export default async function SuccessStoriesPage() {
                 </section>
 
                 {/* CTA */}
-                <section className="mt-16 text-center">
-                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
-                        <h2 className="text-2xl font-bold mb-4">
+                <section className="mt-12 md:mt-16 text-center">
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 sm:p-8 text-white">
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4">
                             Ready to Write Your Success Story?
                         </h2>
                         <p className="text-gray-400 mb-6 max-w-xl mx-auto">
@@ -171,7 +174,7 @@ export default async function SuccessStoriesPage() {
                         </p>
                         <a
                             href="/pricing"
-                            className="inline-block px-8 py-3 bg-[#2EBD59] hover:bg-[#26a34d] text-white font-semibold rounded-xl transition-colors"
+                            className="inline-block px-6 sm:px-8 py-3 bg-[#2EBD59] hover:bg-[#26a34d] text-white font-semibold rounded-xl transition-all active:scale-95"
                         >
                             Start Learning Today
                         </a>

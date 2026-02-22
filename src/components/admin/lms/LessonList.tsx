@@ -4,33 +4,42 @@ import { useState } from "react";
 import LessonForm from "./LessonForm";
 import { deleteLesson } from "@/app/admin/lessons/actions";
 
+interface Lesson {
+    id: string;
+    title: string;
+    content: string | null;
+    video_url: string | null;
+    order_index: number;
+    is_free_preview: boolean;
+}
+
 interface LessonListProps {
     courseId: string;
-    initialLessons: any[];
+    initialLessons: Lesson[];
 }
 
 export default function LessonList({ courseId, initialLessons }: LessonListProps) {
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [editingLesson, setEditingLesson] = useState<any | null>(null);
+    const [editingLesson, setEditingLesson] = useState<Lesson | undefined>(undefined);
 
     // InitialLessons are from server, but we rely on revalidatePath to update the page passed props?
     // Actually, in a client component, props update when parent re-renders (which happens on revalidatePath).
     // So distinct state for lessons isn't strictly needed if we trust the re-render.
     // But for optimistic updates, it's better. For now, we'll simpler approach: rely on server refresh.
 
-    const handleEdit = (lesson: any) => {
+    const handleEdit = (lesson: Lesson) => {
         setEditingLesson(lesson);
         setIsFormOpen(true);
     };
 
     const handleAdd = () => {
-        setEditingLesson(null);
+        setEditingLesson(undefined);
         setIsFormOpen(true);
     };
 
     const handleClose = () => {
         setIsFormOpen(false);
-        setEditingLesson(null);
+        setEditingLesson(undefined);
     };
 
     return (
@@ -51,7 +60,7 @@ export default function LessonList({ courseId, initialLessons }: LessonListProps
                 </div>
             ) : (
                 <div className="space-y-3">
-                    {initialLessons.map((lesson: any) => (
+                    {initialLessons.map((lesson: Lesson) => (
                         <div key={lesson.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-[#2EBD59]/30 transition-colors">
                             <div className="flex items-center gap-4">
                                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-xs font-bold text-gray-500 border border-gray-200">

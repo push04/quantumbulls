@@ -20,14 +20,9 @@ export default function ABExperiments() {
     const [showCreate, setShowCreate] = useState(false);
     const [newExperiment, setNewExperiment] = useState({ name: '', description: '', goalEvent: 'signup' });
 
-    useEffect(() => {
-        loadExperiments();
-    }, []);
-
     async function loadExperiments() {
         const running = await getRunningExperiments();
 
-        // Get results for each
         const withResults = await Promise.all(
             running.map(async (exp) => ({
                 ...exp,
@@ -38,6 +33,11 @@ export default function ABExperiments() {
         setExperiments(withResults);
         setLoading(false);
     }
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        loadExperiments();
+    }, []);
 
     async function handleCreate() {
         if (!newExperiment.name) return;

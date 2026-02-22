@@ -17,8 +17,8 @@ const REASONS = [
     { id: 'too_expensive', label: 'Too expensive for me', icon: '💰' },
     { id: 'not_enough_content', label: 'Not enough content', icon: '📚' },
     { id: 'found_alternative', label: 'Found a better alternative', icon: '🔄' },
-    { id: 'no_time', label: "Don't have time to learn", icon: '⏰' },
-    { id: 'not_helpful', label: "Content wasn't helpful", icon: '😕' },
+    { id: 'no_time', label: "Don&apos;t have time to learn", icon: '⏰' },
+    { id: 'not_helpful', label: "Content wasn&apos;t helpful", icon: '😕' },
     { id: 'other', label: 'Other reason', icon: '💬' },
 ];
 
@@ -48,7 +48,7 @@ export default function ExitSurvey({ onSubmit, onClose }: ExitSurveyProps) {
                 <div className="p-6 border-b border-gray-100">
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-bold text-gray-900">
-                            We're Sorry to See You Go
+                            We&apos;re Sorry to See You Go
                         </h2>
                         <button
                             onClick={onClose}
@@ -69,7 +69,7 @@ export default function ExitSurvey({ onSubmit, onClose }: ExitSurveyProps) {
                     {step === 1 && (
                         <>
                             <p className="text-gray-700 mb-4">
-                                What's the main reason you're leaving?
+                                What&apos;s the main reason you&apos;re leaving?
                             </p>
                             <div className="space-y-2">
                                 {REASONS.map((r) => (
@@ -99,7 +99,7 @@ export default function ExitSurvey({ onSubmit, onClose }: ExitSurveyProps) {
                     {step === 2 && (
                         <>
                             <p className="text-gray-700 mb-4">
-                                Anything else you'd like to share?
+                                Anything else you&apos;d like to share?
                             </p>
                             <textarea
                                 value={feedback}

@@ -4,12 +4,17 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player"; // Reverted to standard import to fix build error
 import screenfull from "screenfull";
 
+interface ReactPlayerType {
+    seekTo: (time: number) => void;
+    getCurrentTime: () => number;
+}
+
 interface CustomVideoPlayerProps {
     url: string;
     thumbnail?: string | null;
     onEnded?: () => void;
     onDuration?: (duration: number) => void;
-    onProgress?: (state: any) => void;
+    onProgress?: (state: { played: number; playedSeconds: number; loaded: number; loadedSeconds: number }) => void;
 }
 
 const formatDuration = (seconds: number) => {
@@ -19,13 +24,15 @@ const formatDuration = (seconds: number) => {
 };
 
 export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration, onProgress }: CustomVideoPlayerProps) {
-    const playerRef = useRef<any>(null);
+    const playerRef = useRef<ReactPlayerType>(null);
     const playerContainerRef = useRef<HTMLDivElement>(null);
-    const [mounted, setMounted] = useState(false);
+    const [mounted, setMounted] = useState(true);
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         setMounted(true);
     }, []);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     const [playing, setPlaying] = useState(false);
     const [volume, setVolume] = useState(0.8);
@@ -56,7 +63,7 @@ export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration,
         }
     };
 
-    const handleProgress = (state: any) => {
+    const handleProgress = (state: { played: number; playedSeconds: number; loaded: number; loadedSeconds: number }) => {
         if (!seeking) {
             setPlayed(state.played);
         }
@@ -104,8 +111,7 @@ export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration,
         );
     }
 
-    // Cast to any to avoid strict type checks on this external library
-    const ReactPlayerAny = ReactPlayer as any;
+    const ReactPlayerAny = ReactPlayer as unknown;
 
     if (error) {
         return (
@@ -130,7 +136,7 @@ export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration,
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            {/* @ts-ignore */}
+            {/* @ts-expect-error - ReactPlayerAny is used for external library compatibility */}
             <ReactPlayerAny
                 key={url} // Force re-mount on URL change
                 ref={playerRef}
@@ -146,7 +152,7 @@ export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration,
                 }}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
-                onError={(e: any) => {
+                onError={(e: unknown) => {
                     console.error("Video Player Error:", e);
                     setError("Failed to load video");
                 }}

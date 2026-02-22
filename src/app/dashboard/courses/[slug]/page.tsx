@@ -57,7 +57,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
     // Calculated Stats
     const lessonCount = course.lessons?.length || 0;
-    const totalDuration = course.lessons?.reduce((acc: number, l: any) => acc + (l.duration_seconds || 0), 0) || 0;
+    const totalDuration = course.lessons?.reduce((acc: number, l: { duration_seconds: number }) => acc + (l.duration_seconds || 0), 0) || 0;
     const durationHours = Math.ceil(totalDuration / 3600);
 
     return (
@@ -190,7 +190,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
                         {/* What you'll learn */}
                         <section>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">What you'll learn</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-6">What you&apos;ll learn</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {['Master foundational concepts', 'Analyze real-world market scenarios', 'Develop a profitable trading strategy', 'Risk management best practices', 'Psychology of a winning trader'].map((item, i) => (
                                     <div key={i} className="flex items-start gap-3">
@@ -212,8 +212,8 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                                 <div className="divide-y divide-gray-100">
                                     {course.lessons && course.lessons.length > 0 ? (
                                         course.lessons
-                                            .sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0))
-                                            .map((lesson: any, index: number) => (
+                                            .sort((a: { order_index: number }, b: { order_index: number }) => (a.order_index || 0) - (b.order_index || 0))
+                                            .map((lesson: { id: string; title: string; slug: string; duration_seconds: number; is_free_preview: boolean }, index: number) => (
                                                 <div key={lesson.id} className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between group">
                                                     <div className="flex items-center gap-4">
                                                         <span className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-sm font-medium">

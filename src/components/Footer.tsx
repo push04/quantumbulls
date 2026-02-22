@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Icon from "@/components/ui/Icon";
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 const footerLinks = {
     product: [
@@ -143,10 +146,11 @@ export default function Footer() {
                 {/* Bottom bar */}
                 <div className="mt-10 pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-gray-400 text-sm">
-                        © {new Date().getFullYear()} Quantum Bull. All rights reserved.
+                        © {CURRENT_YEAR} Quantum Bull. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-400">
-                        <span>Made in India 🇮🇳</span>
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <Icon name="heart" size={14} className="text-red-500" />
+                        <span>Made in India</span>
                     </div>
                 </div>
             </div>

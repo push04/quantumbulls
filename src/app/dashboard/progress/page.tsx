@@ -158,7 +158,7 @@ export default async function ProgressPage() {
                     </div>
                 ) : (
                     <div className="bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-8 text-center">
-                        <p className="text-gray-500">You're up to date! Check the course library for more.</p>
+                        <p className="text-gray-500">You&apos;re up to date! Check the course library for more.</p>
                     </div>
                 )}
             </section>

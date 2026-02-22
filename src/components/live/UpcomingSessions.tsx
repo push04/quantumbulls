@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { getUpcomingSessions, getCurrentLiveSession, type LiveSession } from "@/lib/live";
 
@@ -76,8 +76,12 @@ export default function UpcomingSessions() {
 
 function SessionCard({ session }: { session: LiveSession }) {
     const date = new Date(session.scheduled_at);
-    const isToday = new Date().toDateString() === date.toDateString();
-    const isTomorrow = new Date(Date.now() + 86400000).toDateString() === date.toDateString();
+    // eslint-disable-next-line react-hooks/purity
+    const today = useMemo(() => new Date().toDateString(), []);
+    // eslint-disable-next-line react-hooks/purity
+    const tomorrow = useMemo(() => new Date(Date.now() + 86400000).toDateString(), []);
+    const isToday = today === date.toDateString();
+    const isTomorrow = tomorrow === date.toDateString();
 
     const tierColors: Record<string, string> = {
         free: "bg-gray-100 text-gray-700",

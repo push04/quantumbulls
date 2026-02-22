@@ -23,7 +23,6 @@ export default function SessionGuard({
 
     useEffect(() => {
         const supabase = createClient();
-        let intervalId: NodeJS.Timeout;
 
         const checkSession = async () => {
             try {
@@ -48,19 +47,18 @@ export default function SessionGuard({
                     const message = conflictSession
                         ? `You were logged out because someone logged in from ${conflictSession.device_name}`
                         : "Your session expired. Please log in again.";
-
+                    
                     router.push(`/signin?message=${encodeURIComponent(message)}`);
                 }
             } catch (error) {
-                console.error("Session check error:", error);
+                console.error("Session check failed:", error);
             }
         };
 
+        const intervalId: NodeJS.Timeout = setInterval(checkSession, checkInterval);
+
         // Initial check
         checkSession();
-
-        // Periodic checks
-        intervalId = setInterval(checkSession, checkInterval);
 
         // Cleanup
         return () => {

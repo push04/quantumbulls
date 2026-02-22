@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Icon from "@/components/ui/Icon";
 
 const menuItems = [
-    { name: "Dashboard", href: "/dashboard", icon: "📊" },
-    { name: "My Learning", href: "/dashboard/progress", icon: "🎯" },
-    { name: "All Courses", href: "/dashboard/courses", icon: "📚" },
-    { name: "Live Sessions", href: "/dashboard/live", icon: "🔴" },
-    { name: "Community", href: "/community", icon: "💬" },
-    { name: "Settings", href: "/dashboard/settings", icon: "⚙️" },
+    { name: "Dashboard", href: "/dashboard", icon: "dashboard" },
+    { name: "My Learning", href: "/dashboard/progress", icon: "target" },
+    { name: "All Courses", href: "/dashboard/courses", icon: "book" },
+    { name: "Live Sessions", href: "/dashboard/live", icon: "live" },
+    { name: "Community", href: "/community", icon: "chat" },
+    { name: "Settings", href: "/dashboard/settings", icon: "settings" },
 ];
 
 export default function Sidebar() {
@@ -39,7 +40,7 @@ export default function Sidebar() {
                                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                         }`}
                                 >
-                                    <span className={`text-lg transition-transform group-hover:scale-110 ${!isActive && "grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100"}`}>{item.icon}</span>
+                                    <Icon name={item.icon as any} size={20} className={`transition-transform group-hover:scale-110 ${!isActive ? "text-gray-400 group-hover:text-[#2EBD59]" : "text-white"}`} />
                                     {item.name}
                                 </Link>
                             );
@@ -53,8 +54,8 @@ export default function Sidebar() {
                     <div className="absolute top-0 right-0 w-24 h-24 bg-[#2EBD59] rounded-full blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-[#2EBD59]/20 rounded-xl flex items-center justify-center text-xl shadow-inner shadow-[#2EBD59]/10">
-                                👑
+                            <div className="w-10 h-10 bg-[#2EBD59]/20 rounded-xl flex items-center justify-center shadow-inner shadow-[#2EBD59]/10">
+                                <Icon name="crown" size={20} className="text-[#2EBD59]" />
                             </div>
                             <div className="text-left">
                                 <h3 className="text-white font-bold text-sm leading-tight">Go Pro</h3>

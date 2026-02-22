@@ -31,7 +31,7 @@ export default function DailyChallengeCard({
         return (
             <div className="bg-white rounded-2xl border border-gray-200 p-4">
                 <div className="text-center text-gray-500 py-4">
-                    Loading today's challenge...
+                    Loading today&apos;s challenge...
                 </div>
             </div>
         );
@@ -50,7 +50,7 @@ export default function DailyChallengeCard({
                     <span className="text-2xl">{CHALLENGE_ICONS[challenge.challengeType]}</span>
                     <div>
                         <div className="font-semibold text-gray-900">
-                            Today's Challenge
+                            Today&apos;s Challenge
                         </div>
                         <div className="text-xs text-gray-500">
                             {CHALLENGE_TITLES[challenge.challengeType]}
@@ -77,7 +77,7 @@ export default function DailyChallengeCard({
                 }`}>
                 {challenge.targetTitle ? (
                     <p className="text-sm text-gray-700">
-                        Watch <span className="font-medium">"{challenge.targetTitle}"</span> to complete today's challenge and maintain your streak!
+                        Watch <span className="font-medium">&quot;{challenge.targetTitle}&quot;</span> to complete today&apos;s challenge and maintain your streak!
                     </p>
                 ) : (
                     <p className="text-sm text-gray-700">
@@ -98,7 +98,7 @@ export default function DailyChallengeCard({
 
             {isCompleted && (
                 <div className="text-center text-sm text-green-600">
-                    🎉 You've completed today's challenge at {new Date(challenge.completedAt!).toLocaleTimeString()}
+                    🎉 You&apos;ve completed today&apos;s challenge at {new Date(challenge.completedAt!).toLocaleTimeString()}
                 </div>
             )}
         </div>

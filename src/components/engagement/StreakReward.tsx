@@ -62,7 +62,7 @@ export default function StreakReward({ milestone, onClose }: StreakRewardProps) 
 
                 {/* Days */}
                 <p className="text-gray-600 mb-4">
-                    You've maintained your learning streak for <span className="font-bold text-orange-500">{milestone.days} days</span>!
+                    You&apos;ve maintained your learning streak for <span className="font-bold text-orange-500">{milestone.days} days</span>!
                 </p>
 
                 {/* XP earned */}

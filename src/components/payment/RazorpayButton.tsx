@@ -7,9 +7,9 @@ interface RazorpayButtonProps {
     amount: number; // in INR
     currency?: string;
     description?: string;
-    metadata?: any;
+    metadata?: Record<string, string>;
     onSuccess?: (paymentId: string, orderId: string, signature: string) => void;
-    onError?: (error: any) => void;
+    onError?: (error: Error | unknown) => void;
     className?: string;
     children?: React.ReactNode;
 }
@@ -53,6 +53,7 @@ export default function RazorpayButton({
                 name: "Quantum Bull",
                 description: description,
                 order_id: order_id,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 handler: function (response: any) {
                     // Success callback
                     if (onSuccess) {
@@ -71,13 +72,16 @@ export default function RazorpayButton({
                     color: "#2EBD59",
                 },
                 modal: {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     ondismiss: function () {
                         setIsLoading(false);
                     }
                 }
             };
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const rzp = new (window as any).Razorpay(options);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             rzp.on("payment.failed", function (response: any) {
                 if (onError) onError(response.error);
                 setIsLoading(false);

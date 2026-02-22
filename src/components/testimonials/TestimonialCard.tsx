@@ -32,7 +32,7 @@ export default function TestimonialCard({
             }`}>
             {/* Quote icon */}
             <div className={`text-3xl mb-4 ${isFeatured ? 'text-[#2EBD59]' : 'text-gray-300'}`}>
-                "
+                &quot;
             </div>
 
             {/* Content */}

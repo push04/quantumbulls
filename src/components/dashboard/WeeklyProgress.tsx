@@ -71,7 +71,7 @@ export default function WeeklyProgress({ data }: WeeklyProgressProps) {
                 </p>
             ) : (
                 <p className="text-center text-sm text-gray-500 mt-4">
-                    Amazing progress this week! You're on fire! 🔥
+                    Amazing progress this week! You&apos;re on fire! 🔥
                 </p>
             )}
         </div>

@@ -35,8 +35,8 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ success: true, order_id: order.id });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error("Manual Payment API Error:", error);
-        return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ error: error instanceof Error ? error.message : "Internal Server Error" }, { status: 500 });
     }
 }

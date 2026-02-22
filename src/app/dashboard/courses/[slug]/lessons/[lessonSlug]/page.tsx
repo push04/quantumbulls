@@ -42,7 +42,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72">
                 <div className="text-center space-y-4">
                     <h1 className="text-4xl font-bold text-white tracking-tight">Lesson Not Found</h1>
-                    <p className="text-gray-400">The lesson you are looking for does not exist or you don't have access.</p>
+                    <p className="text-gray-400">The lesson you are looking for does not exist or you don&apos;t have access.</p>
                     <Link href={`/dashboard/courses/${slug}`} className="inline-flex px-6 py-3 bg-[#2EBD59] text-white rounded-xl font-bold hover:bg-[#26a34d] transition-all shadow-lg shadow-[#2EBD59]/20">
                         Back to Course
                     </Link>
@@ -72,8 +72,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     }
 
     // Sort lessons
-    const lessons = course.lessons?.sort((a: any, b: any) => (a.order_index || 0) - (b.order_index || 0)) || [];
-    const currentIndex = lessons.findIndex((l: any) => l.slug === lessonSlug);
+    const lessons = (course.lessons || []).sort((a: { order_index: number }, b: { order_index: number }) => (a.order_index || 0) - (b.order_index || 0));
+    const currentIndex = lessons.findIndex((l: { slug: string }) => l.slug === lessonSlug);
     const nextLesson = lessons[currentIndex + 1];
     const prevLesson = lessons[currentIndex - 1];
 
@@ -282,7 +282,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                         </div>
 
                         <div className="flex-1 overflow-y-auto custom-scrollbar p-0">
-                            {lessons.map((l: any, i: number) => {
+                            {lessons.map((l: { id: string; slug: string; title: string; is_free_preview: boolean; duration_seconds: number }, i: number) => {
                                 const isActive = l.slug === lessonSlug;
                                 const isCompleted = i < currentIndex;
 

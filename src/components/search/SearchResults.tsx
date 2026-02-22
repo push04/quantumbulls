@@ -82,7 +82,7 @@ export default function SearchResults({
         <div className="space-y-4">
             {/* Results header */}
             <div className="text-sm text-gray-500">
-                {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+                {results.length} result{results.length !== 1 ? 's' : ''} for &quot;{query}&quot;
             </div>
 
             {/* Results list */}

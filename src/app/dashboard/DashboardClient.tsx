@@ -187,7 +187,7 @@ export default function DashboardClient({ user, profile }: DashboardClientProps)
                                         <div className="flex items-center gap-3 mb-3">
                                             <span className="text-2xl bg-white/20 p-2 rounded-lg">💬</span>
                                             <div>
-                                                <h3 className="font-bold text-lg leading-tight">Trader's Hub</h3>
+                                                <h3 className="font-bold text-lg leading-tight">Trader&apos;s Hub</h3>
                                                 <p className="text-purple-200 text-xs">500+ Online</p>
                                             </div>
                                         </div>

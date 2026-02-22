@@ -34,9 +34,9 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
 
             const { data } = supabase.storage.from("images").getPublicUrl(filePath);
             onChange(data.publicUrl);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Upload error:", err);
-            setError(err.message || "Failed to upload image");
+            setError(err instanceof Error ? err.message : "Failed to upload image");
         } finally {
             setIsUploading(false);
         }

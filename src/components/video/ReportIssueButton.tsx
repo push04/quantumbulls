@@ -129,7 +129,7 @@ export default function ReportIssueButton({ videoId, onSubmit }: ReportIssueButt
                                     Report Submitted
                                 </h3>
                                 <p className="text-gray-600 mb-6">
-                                    Thank you! We'll look into this issue.
+                                    Thank you! We&apos;ll look into this issue.
                                 </p>
                                 <button
                                     onClick={handleClose}
@@ -148,7 +148,7 @@ export default function ReportIssueButton({ videoId, onSubmit }: ReportIssueButt
                                 {/* Issue type */}
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        What's the issue?
+                                        What&apos;s the issue?
                                     </label>
                                     <div className="space-y-2">
                                         {ISSUE_TYPES.map((type) => (
@@ -186,7 +186,7 @@ export default function ReportIssueButton({ videoId, onSubmit }: ReportIssueButt
 
                                 {/* Info note */}
                                 <p className="text-xs text-gray-400 mb-4">
-                                    We'll collect some technical info automatically to help us diagnose the problem.
+                                    We&apos;ll collect some technical info automatically to help us diagnose the problem.
                                 </p>
 
                                 {/* Actions */}

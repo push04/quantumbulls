@@ -12,7 +12,7 @@ interface PlanPaymentButtonProps {
         tier: string;
         interval?: string;
     };
-    user: any;
+    user: { id: string; email?: string } | null;
     className?: string;
     children?: React.ReactNode;
 }
@@ -145,7 +145,7 @@ export default function PlanPaymentButton({ plan, user, className, children }: P
             metadata={{
                 action: 'subscription_update',
                 tier: plan.tier,
-                interval: plan.interval
+                interval: plan.interval || 'month'
             }}
             onSuccess={handleSuccess}
             className={className}

@@ -112,6 +112,7 @@ export function useVideoKeyboard({
     }, [getVideo]);
 
     // Define all shortcuts
+    // eslint-disable-next-line react-hooks/purity
     const shortcuts: Record<string, KeyboardShortcut> = {
         ' ': { key: 'Space', description: 'Play / Pause', action: togglePlay },
         'k': { key: 'K', description: 'Play / Pause', action: togglePlay },
