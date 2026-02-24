@@ -78,8 +78,8 @@ export default function SignUpPage() {
                 return;
             }
 
-            // Redirect to verification pending page
-            router.push("/verify-email");
+            // Redirect directly to dashboard (skip email verification)
+            router.push("/dashboard");
         } catch {
             setError("Something went wrong. Please try again.");
         } finally {
