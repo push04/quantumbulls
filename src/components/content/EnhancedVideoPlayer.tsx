@@ -27,7 +27,12 @@ function detectVideoSource(url: string): VideoSource {
     
     if (youtubePatterns.some(p => p.test(url))) return "youtube";
     
-    if (url.includes("supabase.co") || url.includes("storage.googleapis.com")) return "supabase";
+    const supabasePatterns = [
+        /supabase\.co\/storage\/v1\/object\/public\//,
+        /storage\.googleapis\.com\//
+    ];
+    
+    if (supabasePatterns.some(p => p.test(url))) return "supabase";
     
     if (url.match(/\.(mp4|webm|ogg|m3u8)(?:\?.*)?$/i)) return "direct";
     
@@ -359,6 +364,9 @@ export default function EnhancedVideoPlayer({
                 </svg>
                 <h3 className="text-white font-bold text-lg mb-2">Video Unavailable</h3>
                 <p className="text-gray-400 text-sm mb-4 max-w-md">{error}</p>
+                <p className="text-gray-500 text-xs mb-4 font-mono break-all bg-gray-800 p-2 rounded">
+                    URL: {validUrl}
+                </p>
                 <button
                     onClick={() => window.open(validUrl, '_blank')}
                     className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-colors"
@@ -377,6 +385,11 @@ export default function EnhancedVideoPlayer({
             onMouseLeave={() => isPlaying && setShowControls(false)}
             onClick={handlePlayPause}
         >
+            {/* Debug Info */}
+            <div className="absolute top-2 left-2 z-40 bg-black/70 px-2 py-1 rounded text-xs text-gray-400 font-mono">
+                {source}: {validUrl.substring(0, 50)}...
+            </div>
+            
             {thumbnail && !isPlaying && (
                 <div 
                     className="absolute inset-0 bg-cover bg-center z-0"
@@ -391,6 +404,7 @@ export default function EnhancedVideoPlayer({
                 playsInline
                 preload="metadata"
                 muted={muted}
+                crossOrigin="anonymous"
             />
 
             {isLoading && (
