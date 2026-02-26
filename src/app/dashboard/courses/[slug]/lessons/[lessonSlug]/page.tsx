@@ -104,7 +104,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                                 {lesson.video_url ? (
                                     <EnhancedVideoPlayer 
                                         url={lesson.video_url} 
-                                        thumbnail={lesson.thumbnail_url}
+                                        thumbnail={lesson.thumbnail_url || undefined}
                                         onEnded={() => {
                                             console.log("Video ended");
                                         }}

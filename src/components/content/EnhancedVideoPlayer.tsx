@@ -76,8 +76,9 @@ export default function EnhancedVideoPlayer({
     const [isFullscreen, setIsFullscreen] = useState(false);
     
     const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const source = detectVideoSource(url);
-    const youtubeId = source === "youtube" ? getYouTubeId(url) : null;
+    const validUrl = url && typeof url === 'string' && url.length > 0 ? url : '';
+    const source = detectVideoSource(validUrl);
+    const youtubeId = source === "youtube" ? getYouTubeId(validUrl) : null;
 
     useEffect(() => {
         setMounted(true);
@@ -192,7 +193,7 @@ export default function EnhancedVideoPlayer({
     }, [duration]);
 
     useEffect(() => {
-        if (source === "youtube" || !url) return;
+        if (source === "youtube" || !validUrl) return;
 
         const video = videoRef.current;
         if (!video) return;
@@ -260,7 +261,7 @@ export default function EnhancedVideoPlayer({
             video.removeEventListener("waiting", handleWaiting);
             video.removeEventListener("playing", handlePlaying);
         };
-    }, [url, source, onEnded, onProgress, onDuration, duration]);
+    }, [validUrl, source, onEnded, onProgress, onDuration, duration]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -321,7 +322,7 @@ export default function EnhancedVideoPlayer({
         );
     }
 
-    if (!url) {
+    if (!validUrl) {
         return (
             <div className="relative w-full aspect-video bg-[#0B0F19] rounded-xl flex flex-col items-center justify-center">
                 <svg className="w-16 h-16 text-gray-700 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -359,7 +360,7 @@ export default function EnhancedVideoPlayer({
                 <h3 className="text-white font-bold text-lg mb-2">Video Unavailable</h3>
                 <p className="text-gray-400 text-sm mb-4 max-w-md">{error}</p>
                 <button
-                    onClick={() => window.open(url, '_blank')}
+                    onClick={() => window.open(validUrl, '_blank')}
                     className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-colors"
                 >
                     Open in New Tab
@@ -385,7 +386,7 @@ export default function EnhancedVideoPlayer({
             
             <video
                 ref={videoRef}
-                src={url}
+                src={validUrl}
                 className="w-full h-full object-contain"
                 playsInline
                 preload="metadata"
