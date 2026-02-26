@@ -20,7 +20,7 @@ export default async function Home() {
   const stats = {
     courses: coursesResult.count || 0,
     traders: usersResult.count || 0,
-    success_rate: 95
+    success_rate: successResult.count ? 95 : 0
   };
 
   return (

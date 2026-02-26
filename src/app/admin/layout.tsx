@@ -8,10 +8,12 @@ export const metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
         <AdminGuard>
-            <div className="min-h-screen bg-gray-50">
+            <div className="min-h-screen bg-slate-50">
                 <AdminSidebar />
-                <div className="md:ml-64 pt-24 px-8 pb-12">
-                    {children}
+                <div className="md:ml-64 pt-6 px-6 pb-12">
+                    <div className="max-w-7xl mx-auto">
+                        {children}
+                    </div>
                 </div>
             </div>
         </AdminGuard>

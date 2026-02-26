@@ -3,7 +3,7 @@
  * Provides keyboard controls for video playback
  */
 
-import { useEffect, useCallback, RefObject } from 'react';
+import { useEffect, useCallback, useMemo, RefObject } from 'react';
 
 interface UseVideoKeyboardOptions {
     videoRef: RefObject<HTMLVideoElement | null>;
@@ -111,9 +111,8 @@ export function useVideoKeyboard({
         video.playbackRate = speeds[prevIndex];
     }, [getVideo]);
 
-    // Define all shortcuts
-    // eslint-disable-next-line react-hooks/purity
-    const shortcuts: Record<string, KeyboardShortcut> = {
+    // Define all shortcuts using useMemo to prevent ref access during render
+    const shortcuts: Record<string, KeyboardShortcut> = useMemo(() => ({
         ' ': { key: 'Space', description: 'Play / Pause', action: togglePlay },
         'k': { key: 'K', description: 'Play / Pause', action: togglePlay },
         'ArrowRight': { key: '→', description: `Skip ${skipAmount}s forward`, action: skipForward },
@@ -128,7 +127,7 @@ export function useVideoKeyboard({
         '<': { key: '<', description: 'Decrease speed', action: speedDown },
         't': { key: 'T', description: 'Theater mode', action: () => onToggleTheaterMode?.() },
         '?': { key: '?', description: 'Show shortcuts', action: () => onShowShortcuts?.() },
-    };
+    }), [togglePlay, skipForward, skipBackward, toggleMute, toggleFullscreen, volumeUp, volumeDown, speedUp, speedDown, onToggleTheaterMode, onShowShortcuts, skipAmount]);
 
     useEffect(() => {
         if (!enabled) return;
@@ -152,11 +151,14 @@ export function useVideoKeyboard({
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [enabled, shortcuts]);
+    }, [enabled, shortcuts, togglePlay, skipForward, skipBackward, onToggleTheaterMode, onShowShortcuts]);
 
-    // Return list of shortcuts for display
-    const shortcutList = Object.values(shortcuts).filter(
-        (s, i, arr) => arr.findIndex(x => x.description === s.description) === i
+    // Return list of shortcuts for display - use useMemo to avoid ref access during render
+    const shortcutList = useMemo(() => 
+        Object.values(shortcuts).filter(
+            (s, i, arr) => arr.findIndex(x => x.description === s.description) === i
+        ),
+        [shortcuts]
     );
 
     return {

@@ -83,11 +83,11 @@ export default function Hero({ stats }: { stats?: { courses: number; traders: nu
                         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-gray-500">
                             <div className="flex items-center gap-2">
                                 <Icon name="check-circle" size={16} className="text-[#2EBD59]" />
-                                <span>500+ Video Lessons</span>
+                                <span>{targetStats.courses}+ Video Lessons</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Icon name="check-circle" size={16} className="text-[#2EBD59]" />
-                                <span>Expert Mentors</span>
+                                <span>{targetStats.traders.toLocaleString()}+ Active Traders</span>
                             </div>
                         </div>
                     </div>
@@ -143,14 +143,14 @@ export default function Hero({ stats }: { stats?: { courses: number; traders: nu
                             <div className="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg border border-gray-100 p-3 animate-float">
                                 <div className="flex items-center gap-2">
                                     <Icon name="award" size={16} className="text-amber-500" />
-                                    <span className="text-sm font-medium text-gray-700">95% Success Rate</span>
+                                    <span className="text-sm font-medium text-gray-700">{targetStats.success_rate}% Success Rate</span>
                                 </div>
                             </div>
 
                             <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg border border-gray-100 p-3 animate-float-reverse">
                                 <div className="flex items-center gap-2">
                                     <Icon name="users" size={16} className="text-[#2EBD59]" />
-                                    <span className="text-sm font-medium text-gray-700">10K+ Members</span>
+                                    <span className="text-sm font-medium text-gray-700">{targetStats.traders.toLocaleString()}+ Members</span>
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
     return (
         <SessionGuard userId={user.id}>
-            <div className="min-h-screen bg-[#F8FAFC]">
+            <div className="min-h-screen bg-slate-50">
                 <Sidebar />
                 <main className="lg:pl-72 transition-all duration-300">
                     {children}
