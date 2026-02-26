@@ -7,34 +7,68 @@ import EnhancedVideoPlayer from "@/components/content/EnhancedVideoPlayer";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonSlug: string }> }) {
     const { slug, lessonSlug } = await params;
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    
+    let supabase;
+    try {
+        supabase = await createClient();
+    } catch (err) {
+        console.error("Failed to create Supabase client:", err);
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72">
+                <div className="text-center space-y-4">
+                    <h1 className="text-4xl font-bold text-white tracking-tight">Service Unavailable</h1>
+                    <p className="text-gray-400">Unable to connect to the server. Please try again later.</p>
+                    <Link href={`/dashboard/courses/${slug}`} className="inline-flex px-6 py-3 bg-[#2EBD59] text-white rounded-xl font-bold hover:bg-[#26a34d] transition-all shadow-lg shadow-[#2EBD59]/20">
+                        Back to Courses
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    let user = null;
+    try {
+        const { data: { user: u } } = await supabase.auth.getUser();
+        user = u;
+    } catch (err) {
+        console.error("Auth error:", err);
+        redirect("/signin");
+    }
 
     if (!user) redirect("/signin");
 
     // Fetch Lesson and Course with robust join
-    const { data: lesson, error: lessonError } = await supabase
-        .from("lessons")
-        .select(`
-            *,
-            course:courses!inner(
-                id,
-                title,
-                slug,
-                tier,
-                lessons(
+    let lesson = null;
+    let lessonError = null;
+    try {
+        const result = await supabase
+            .from("lessons")
+            .select(`
+                *,
+                course:courses!inner(
                     id,
                     title,
                     slug,
-                    duration_seconds,
-                    is_free_preview,
-                    order_index
+                    tier,
+                    lessons(
+                        id,
+                        title,
+                        slug,
+                        duration_seconds,
+                        is_free_preview,
+                        order_index
+                    )
                 )
-            )
-        `)
-        .eq("slug", lessonSlug)
-        .eq("course.slug", slug)
-        .single();
+            `)
+            .eq("slug", lessonSlug)
+            .eq("course.slug", slug)
+            .single();
+        lesson = result.data;
+        lessonError = result.error;
+    } catch (err) {
+        console.error("Lesson fetch error:", err);
+        lessonError = err;
+    }
 
     if (lessonError || !lesson) {
         console.error("Lesson fetch error:", lessonError);
@@ -54,11 +88,17 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     const course = lesson.course;
 
     // Check Access
-    const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
+    let profile = null;
+    try {
+        const { data: p } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+        profile = p;
+    } catch (err) {
+        console.error("Profile fetch error:", err);
+    }
 
     const userTier = profile?.role || "free";
     const tierHierarchy: Record<string, number> = { free: 0, basic: 1, pro: 2, mentor: 3, admin: 4 };
