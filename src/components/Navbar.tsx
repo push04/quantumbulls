@@ -71,9 +71,9 @@ export default function Navbar() {
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${isScrolled ? 'shadow-lg shadow-slate-200/50' : 'shadow-sm'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20 sm:h-24">
+                <div className="flex items-center justify-between h-24 sm:h-28">
                     <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-                        <img src="/logo.svg" alt="Quantum Bull" className="h-16 sm:h-20 w-auto" />
+                        <img src="/logo.svg" alt="Quantum Bull" className="h-20 sm:h-24 w-auto" />
                     </Link>
 
                     <div className="hidden md:flex items-center gap-1">
