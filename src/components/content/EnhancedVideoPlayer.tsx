@@ -339,7 +339,7 @@ export default function EnhancedVideoPlayer({
                 className="relative w-full aspect-video bg-black group overflow-hidden rounded-xl shadow-2xl"
             >
                 <iframe
-                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&showinfo=0&cc_load_policy=0`}
                     title="YouTube video"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
