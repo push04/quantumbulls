@@ -70,7 +70,20 @@ export default function SignInForm() {
                     console.error("Failed to update session:", updateError);
                 }
 
-                const redirectTo = searchParams.get("redirect") || "/dashboard";
+                const redirectParam = searchParams.get("redirect");
+                let redirectTo = redirectParam || "/dashboard";
+                
+                // Check if user is admin and redirect to admin dashboard
+                const { data: profile } = await supabase
+                    .from("profiles")
+                    .select("role")
+                    .eq("id", data.user.id)
+                    .single();
+                
+                if (profile?.role === "admin") {
+                    redirectTo = "/admin";
+                }
+                
                 router.push(redirectTo);
                 router.refresh();
             }

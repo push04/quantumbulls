@@ -14,7 +14,7 @@ export default async function NewThreadPage({ params }: PageProps) {
     // Check auth
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
-        redirect("/auth/login?redirect=/community/" + categorySlug + "/new");
+        redirect("/signin?redirect=/community/" + categorySlug + "/new");
     }
 
     // Get category info
