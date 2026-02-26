@@ -12,12 +12,16 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     try {
         supabase = await createClient();
     } catch (err) {
+        const errorMsg = err instanceof Error ? err.message : JSON.stringify(err);
         console.error("Failed to create Supabase client:", err);
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72">
-                <div className="text-center space-y-4">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72 p-4">
+                <div className="text-center space-y-4 max-w-lg">
                     <h1 className="text-4xl font-bold text-white tracking-tight">Service Unavailable</h1>
                     <p className="text-gray-400">Unable to connect to the server. Please try again later.</p>
+                    <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-left">
+                        <p className="text-xs text-red-400 font-mono break-all">Error: {errorMsg}</p>
+                    </div>
                     <Link href={`/dashboard/courses/${slug}`} className="inline-flex px-6 py-3 bg-[#2EBD59] text-white rounded-xl font-bold hover:bg-[#26a34d] transition-all shadow-lg shadow-[#2EBD59]/20">
                         Back to Courses
                     </Link>
@@ -71,12 +75,16 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     }
 
     if (lessonError || !lesson) {
+        const errorMsg = lessonError instanceof Error ? lessonError.message : JSON.stringify(lessonError);
         console.error("Lesson fetch error:", lessonError);
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72">
-                <div className="text-center space-y-4">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F19] text-white lg:pl-72 p-4">
+                <div className="text-center space-y-4 max-w-lg">
                     <h1 className="text-4xl font-bold text-white tracking-tight">Lesson Not Found</h1>
                     <p className="text-gray-400">The lesson you are looking for does not exist or you don&apos;t have access.</p>
+                    <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-left">
+                        <p className="text-xs text-red-400 font-mono break-all">Error: {errorMsg}</p>
+                    </div>
                     <Link href={`/dashboard/courses/${slug}`} className="inline-flex px-6 py-3 bg-[#2EBD59] text-white rounded-xl font-bold hover:bg-[#26a34d] transition-all shadow-lg shadow-[#2EBD59]/20">
                         Back to Course
                     </Link>
