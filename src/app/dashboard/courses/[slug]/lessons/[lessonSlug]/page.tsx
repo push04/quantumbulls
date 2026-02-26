@@ -3,7 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import SessionGuard from "@/components/SessionGuard";
 import { formatDuration } from "@/lib/learning/progressCalculator";
-import SmartVideoPlayer from "@/components/content/SmartVideoPlayer";
+import EnhancedVideoPlayer from "@/components/content/EnhancedVideoPlayer";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string; lessonSlug: string }> }) {
     const { slug, lessonSlug } = await params;
@@ -102,7 +102,13 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                         <div className="w-full bg-black relative border-b border-white/5 z-30 group">
                             <div className="w-full aspect-video max-h-[80vh] mx-auto bg-black relative shadow-2xl">
                                 {lesson.video_url ? (
-                                    <SmartVideoPlayer url={lesson.video_url} />
+                                    <EnhancedVideoPlayer 
+                                        url={lesson.video_url} 
+                                        thumbnail={lesson.thumbnail_url}
+                                        onEnded={() => {
+                                            console.log("Video ended");
+                                        }}
+                                    />
                                 ) : (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0F19] text-gray-500">
                                         <svg className="w-16 h-16 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
