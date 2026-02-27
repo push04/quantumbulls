@@ -2,6 +2,8 @@ import { ThreadDetail } from "@/components/forum";
 import { getThread } from "@/lib/community";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface PageProps {
     params: Promise<{ threadId: string }>;
@@ -35,7 +37,9 @@ export default async function ThreadPage({ params }: PageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50 py-8 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-8 px-4">
             <div className="max-w-4xl mx-auto">
                 <ThreadDetail
                     threadId={threadId}
@@ -44,6 +48,8 @@ export default async function ThreadPage({ params }: PageProps) {
                     isAdmin={isAdmin}
                 />
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

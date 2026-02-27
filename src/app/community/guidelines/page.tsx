@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
     title: "Community Guidelines | Quantum Bull",
@@ -7,7 +9,9 @@ export const metadata = {
 
 export default function CommunityGuidelinesPage() {
     return (
-        <main className="min-h-screen bg-gray-50 py-12 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-12 px-4">
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="bg-[#2EBD59] px-8 py-6 text-white">
                     <h1 className="text-3xl font-bold">Community Guidelines</h1>
@@ -63,6 +67,8 @@ export default function CommunityGuidelinesPage() {
                     </div>
                 </div>
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

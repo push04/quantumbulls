@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import Icon from "@/components/ui/Icon";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
     title: "Courses | Quantum Bull",
@@ -18,7 +20,9 @@ export default async function CoursesPage() {
         .order('order_index', { ascending: true });
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+            <Navbar />
+            <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Trading Courses</h1>
@@ -84,6 +88,8 @@ export default async function CoursesPage() {
                     </div>
                 )}
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

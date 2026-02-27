@@ -1,6 +1,8 @@
 import { CommunityProfile } from "@/components/community";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface PageProps {
     params: Promise<{ userId: string }>;
@@ -28,13 +30,17 @@ export default async function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50 py-8 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-8 px-4">
             <div className="max-w-4xl mx-auto">
                 <CommunityProfile
                     userId={userId}
                     currentUserId={user?.id}
                 />
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

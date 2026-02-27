@@ -1,4 +1,6 @@
 import Icon from "@/components/ui/Icon";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
     title: "Contact Us | Quantum Bull",
@@ -6,7 +8,9 @@ export const metadata = {
 
 export default function ContactPage() {
     return (
-        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-20 pb-12 px-4 sm:px-6">
+        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+            <Navbar />
+            <div className="pt-20 pb-12 px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Contact Us</h1>
                 <p className="text-lg text-gray-600 mb-8 sm:mb-10">
@@ -60,6 +64,8 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

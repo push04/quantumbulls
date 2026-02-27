@@ -2,6 +2,8 @@ import { CreateThreadForm } from "@/components/forum";
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface PageProps {
     params: Promise<{ categorySlug: string }>;
@@ -29,7 +31,9 @@ export default async function NewThreadPage({ params }: PageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50 py-8 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-8 px-4">
             <div className="max-w-2xl mx-auto">
                 {/* Breadcrumb */}
                 <nav className="mb-4 text-sm text-gray-500">
@@ -48,6 +52,8 @@ export default async function NewThreadPage({ params }: PageProps) {
                     userId={user.id}
                 />
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

@@ -2,9 +2,14 @@ export const metadata = {
     title: "Refund Policy | Quantum Bull",
 };
 
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+
 export default function RefundPage() {
     return (
-        <main className="min-h-screen bg-white pt-24 pb-12 px-4">
+        <main className="min-h-screen bg-white">
+            <Navbar />
+            <div className="pt-24 pb-12 px-4">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl font-bold mb-6">Refund Policy</h1>
                 <p className="mb-4">
@@ -14,6 +19,8 @@ export default function RefundPage() {
                     Please contact support@quantumbull.com for any refund requests.
                 </p>
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

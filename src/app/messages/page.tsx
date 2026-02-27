@@ -1,6 +1,8 @@
 import { MessageInbox } from "@/components/community";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
     title: "Messages | Quantum Bull",
@@ -16,10 +18,14 @@ export default async function MessagesPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50 py-8 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-8 px-4">
             <div className="max-w-6xl mx-auto">
                 <MessageInbox userId={user.id} />
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

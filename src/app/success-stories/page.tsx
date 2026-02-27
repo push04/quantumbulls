@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import TestimonialCard from "@/components/testimonials/TestimonialCard";
 import Icon from "@/components/ui/Icon";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 interface SuccessStory {
     id: string;
@@ -33,6 +35,7 @@ export default async function SuccessStoriesPage() {
 
     return (
         <main className="min-h-screen bg-gray-50">
+            <Navbar />
             {/* Hero */}
             <section className="bg-gradient-to-br from-[#2EBD59] to-emerald-600 text-white py-16 md:py-20">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -181,6 +184,7 @@ export default async function SuccessStoriesPage() {
                     </div>
                 </section>
             </div>
+            <Footer />
         </main>
     );
 }

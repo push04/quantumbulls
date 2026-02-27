@@ -1,5 +1,7 @@
 import { UpcomingSessions, SessionCalendar, PastSessions } from "@/components/live";
 import Link from "next/link";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
     title: "Live Sessions | Quantum Bull",
@@ -8,7 +10,9 @@ export const metadata = {
 
 export default function LivePage() {
     return (
-        <main className="min-h-screen bg-gray-50 py-8 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-8 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
@@ -84,6 +88,8 @@ export default function LivePage() {
                     </div>
                 </div>
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }

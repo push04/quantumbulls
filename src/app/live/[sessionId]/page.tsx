@@ -3,6 +3,8 @@ import { getSession, isUserRegistered, registerForSession } from "@/lib/live";
 import { LivePlayer, LivePolls } from "@/components/live";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface PageProps {
     params: Promise<{ sessionId: string }>;
@@ -23,7 +25,9 @@ export default async function SessionPage({ params }: PageProps) {
     if (!user) {
         // Redirect to login
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+            <main className="min-h-screen bg-gray-50">
+                <Navbar />
+                <div className="flex items-center justify-center px-4 py-20">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in Required</h1>
                     <p className="text-gray-600 mb-6">Please sign in to access live sessions</p>
@@ -34,6 +38,8 @@ export default async function SessionPage({ params }: PageProps) {
                         Sign In
                     </Link>
                 </div>
+                </div>
+                <Footer />
             </main>
         );
     }
@@ -56,7 +62,9 @@ export default async function SessionPage({ params }: PageProps) {
 
     if (!hasAccess) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+            <main className="min-h-screen bg-gray-50">
+                <Navbar />
+                <div className="flex items-center justify-center px-4 py-20">
                 <div className="text-center max-w-md">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
                         <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,6 +82,8 @@ export default async function SessionPage({ params }: PageProps) {
                         Upgrade Now
                     </Link>
                 </div>
+                </div>
+                <Footer />
             </main>
         );
     }
@@ -85,7 +95,9 @@ export default async function SessionPage({ params }: PageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50 py-6 px-4">
+        <main className="min-h-screen bg-gray-50">
+            <Navbar />
+            <div className="py-6 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Breadcrumb */}
                 <nav className="mb-4">
@@ -113,6 +125,8 @@ export default async function SessionPage({ params }: PageProps) {
                     </div>
                 )}
             </div>
+            </div>
+            <Footer />
         </main>
     );
 }
