@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Icon from "@/components/ui/Icon";
 
@@ -20,7 +21,7 @@ export default function Sidebar() {
         <aside className="w-72 bg-white border-r border-slate-100 h-screen fixed top-0 left-0 pt-0 hidden lg:flex flex-col z-30 shadow-[4px_0_24px_rgba(0,0,0,0.03)]">
             <div className="h-20 flex items-center px-6 border-b border-slate-50">
                 <Link href="/" className="flex items-center gap-2.5">
-                    <img src="/logo.svg" alt="Quantum Bull" className="h-9 w-auto" />
+                    <Image src="/logo.svg" alt="Quantum Bull" width={120} height={36} className="h-9 w-auto" />
                     <span className="font-bold text-lg tracking-tight text-slate-900">QUANTUM <span className="text-emerald-500">BULL</span></span>
                 </Link>
             </div>

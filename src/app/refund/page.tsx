@@ -9,7 +9,7 @@ export default function RefundPage() {
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
-            <div className="pt-24 pb-12 px-4">
+            <div className="pt-24 sm:pt-28 pb-12 px-4">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl font-bold mb-6">Refund Policy</h1>
                 <p className="mb-4">

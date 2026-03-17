@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import SignInForm from "./SignInForm";
 
 function SignInFormFallback() {
@@ -24,7 +25,7 @@ export default function SignInPage() {
             
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <Link href="/" className="flex justify-center">
-                    <img src="/logo.svg" alt="Quantum Bull" className="h-14 w-auto" />
+                    <Image src="/logo.svg" alt="Quantum Bull" width={160} height={56} className="h-14 w-auto" priority />
                 </Link>
                 <h2 className="mt-8 text-center text-2xl font-bold text-slate-900">
                     Welcome back

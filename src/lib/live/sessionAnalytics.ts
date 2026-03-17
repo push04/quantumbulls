@@ -271,7 +271,6 @@ export async function checkAndAwardEngagementBadge(
     // Award badge if watched 80%+ and sent at least 1 message
     if (watchPercent >= 0.8 && (messageCount || 0) >= 1) {
         // TODO: Integrate with gamification badge system
-        console.log(`User ${userId} earned Engaged Participant badge for session ${sessionId}`);
         return true;
     }
 

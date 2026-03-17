@@ -13,10 +13,18 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         const { plan_name, tier, price, interval } = body;
 
+        if (!plan_name || !tier || price === undefined || price === null) {
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
+        const parsedPrice = Number(price);
+        if (isNaN(parsedPrice) || parsedPrice < 0 || parsedPrice > 100000) {
+            return NextResponse.json({ error: "Invalid price value" }, { status: 400 });
+        }
+
         // Create Manual Order
         const { data: order, error } = await supabase.from("payment_orders").insert({
             user_id: user.id,
-            amount: price * 100, // stored in paise
+            amount: Math.round(parsedPrice * 100), // stored in paise
             currency: "INR",
             status: "manual_verification_pending",
             description: `Manual Request for ${plan_name}`,

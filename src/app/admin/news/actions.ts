@@ -4,8 +4,17 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createNews(formData: FormData) {
+async function requireAdmin() {
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin" && profile?.role !== "superadmin") throw new Error("Forbidden");
+    return { supabase, user };
+}
+
+export async function createNews(formData: FormData) {
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const title = formData.get("title") as string;
     const summary = formData.get("summary") as string;
@@ -31,7 +40,7 @@ export async function createNews(formData: FormData) {
 }
 
 export async function updateNews(id: string, formData: FormData) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const title = formData.get("title") as string;
     const summary = formData.get("summary") as string;
@@ -53,7 +62,7 @@ export async function updateNews(id: string, formData: FormData) {
 }
 
 export async function deleteNews(id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const { error } = await supabase.from("market_news").delete().eq("id", id);
 

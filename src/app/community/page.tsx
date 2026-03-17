@@ -111,7 +111,7 @@ export default async function CommunityPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <div className="pt-20 min-h-screen bg-gray-50">
+      <div className="pt-24 sm:pt-28 min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           {/* Header */}
           <div className="mb-8">
@@ -306,15 +306,17 @@ export default async function CommunityPage() {
                 </div>
               </div>
 
-              <Link
-                href="/community"
-                className="block mt-4 w-full py-3 bg-[#2EBD59] hover:bg-[#26a34d] text-white font-semibold rounded-xl text-center transition-all active:scale-95"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  View All Discussions
-                  <Icon name="arrow-right" size={18} />
-                </span>
-              </Link>
+              {categories.length > 0 && (
+                <Link
+                  href={`/community/${categories[0].slug}`}
+                  className="block mt-4 w-full py-3 bg-[#2EBD59] hover:bg-[#26a34d] text-white font-semibold rounded-xl text-center transition-all active:scale-95"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Browse All Topics
+                    <Icon name="arrow-right" size={18} />
+                  </span>
+                </Link>
+              )}
             </div>
           </div>
 

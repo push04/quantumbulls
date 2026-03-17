@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import Icon from "@/components/ui/Icon";
 import Footer from "@/components/Footer";
@@ -22,7 +23,7 @@ export default async function CoursesPage() {
     return (
         <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
             <Navbar />
-            <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+            <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Trading Courses</h1>
@@ -49,7 +50,7 @@ export default async function CoursesPage() {
                             >
                                 <div className="h-48 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white relative overflow-hidden">
                                     {course.thumbnail_url ? (
-                                        <img src={course.thumbnail_url} alt={course.title} className="w-full h-full object-cover" />
+                                        <Image src={course.thumbnail_url} alt={course.title} fill className="object-cover" />
                                     ) : (
                                         <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center">
                                             <Icon name="book" size={32} className="text-white" />

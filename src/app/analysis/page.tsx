@@ -19,10 +19,10 @@ export default async function AnalysisPage() {
         .order('published_at', { ascending: false });
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
             <Navbar />
-            <div className="pt-20 pb-12 px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto">
+            <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6 flex-1 flex flex-col">
+            <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
                 <div className="text-center mb-10 sm:mb-12">
                     <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Market Analysis</h1>
                     <p className="text-lg sm:text-xl text-gray-600">
@@ -31,12 +31,14 @@ export default async function AnalysisPage() {
                 </div>
 
                 {!analyses || analyses.length === 0 ? (
-                    <div className="text-center py-12 sm:py-20 bg-white rounded-xl border border-gray-100 shadow-sm">
-                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-                            <Icon name="trending" size={32} className="text-gray-400" />
+                    <div className="flex-1 flex items-center justify-center">
+                        <div className="text-center py-16 sm:py-24 bg-white rounded-xl border border-gray-100 shadow-sm w-full">
+                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                                <Icon name="trending" size={32} className="text-gray-400" />
+                            </div>
+                            <h3 className="text-lg font-medium text-gray-600">No analysis posts available yet.</h3>
+                            <p className="text-gray-500 mt-2">Check back later for market updates.</p>
                         </div>
-                        <h3 className="text-lg font-medium text-gray-600">No analysis posts available yet.</h3>
-                        <p className="text-gray-500 mt-2">Check back later for market updates.</p>
                     </div>
                 ) : (
                     <div className="space-y-4 sm:space-y-6">

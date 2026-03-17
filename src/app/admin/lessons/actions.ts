@@ -3,8 +3,17 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function createLesson(formData: FormData) {
+async function requireAdmin() {
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin" && profile?.role !== "superadmin") throw new Error("Forbidden");
+    return { supabase, user };
+}
+
+export async function createLesson(formData: FormData) {
+    const { supabase } = await requireAdmin();
 
     const course_id = formData.get("course_id") as string;
     const title = formData.get("title") as string;
@@ -38,7 +47,7 @@ export async function createLesson(formData: FormData) {
 }
 
 export async function updateLesson(id: string, formData: FormData) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin();
 
     const course_id = formData.get("course_id") as string;
     const title = formData.get("title") as string;
@@ -63,7 +72,7 @@ export async function updateLesson(id: string, formData: FormData) {
 }
 
 export async function deleteLesson(id: string, course_id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin();
 
     const { error } = await supabase.from("lessons").delete().eq("id", id);
 

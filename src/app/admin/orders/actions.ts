@@ -2,9 +2,19 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+async function requireAdmin() {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin" && profile?.role !== "superadmin") throw new Error("Forbidden");
+    return { supabase, user };
+}
 
 export async function approveOrder(orderId: string, userId: string, metadata: Record<string, unknown>) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     // 1. Update Order Status
     const { error: orderError } = await supabase
@@ -28,7 +38,7 @@ export async function approveOrder(orderId: string, userId: string, metadata: Re
 }
 
 export async function rejectOrder(orderId: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
     const { error } = await supabase
         .from("payment_orders")
         .update({ status: "rejected", updated_at: new Date().toISOString() })

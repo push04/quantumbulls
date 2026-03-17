@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getUpcomingSessions, getPastSessions } from "@/lib/live/liveSession";
@@ -36,7 +37,7 @@ export default async function LiveSessionsPage() {
                             <div key={session.id} className={`group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${index === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
                                 <div className={`relative ${index === 0 ? 'h-64' : 'h-48'} overflow-hidden`}>
                                     {session.thumbnail_url ? (
-                                        <img src={session.thumbnail_url} alt={session.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <Image src={session.thumbnail_url} alt={session.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                     ) : (
                                         <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-5xl">🎥</div>
                                     )}
@@ -98,7 +99,7 @@ export default async function LiveSessionsPage() {
                             <div key={session.id} className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                                 <div className="h-40 bg-gray-100 relative overflow-hidden">
                                     {session.thumbnail_url ? (
-                                        <img src={session.thumbnail_url} alt={session.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                        <Image src={session.thumbnail_url} alt={session.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-3xl text-gray-300 bg-gray-50">📼</div>
                                     )}

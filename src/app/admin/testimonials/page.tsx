@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { updateTestimonialStatus, deleteTestimonial } from "./actions";
 
@@ -35,7 +36,7 @@ export default async function AdminTestimonialsPage() {
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             {t.avatar_url && (
-                                                <img src={t.avatar_url} alt="" className="w-8 h-8 rounded-full" />
+                                                <Image src={t.avatar_url} alt="" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                                             )}
                                             <div>
                                                 <div className="font-medium text-gray-900">{t.author_name}</div>

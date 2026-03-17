@@ -33,7 +33,7 @@ export default async function NewThreadPage({ params }: PageProps) {
     return (
         <main className="min-h-screen bg-gray-50">
             <Navbar />
-            <div className="py-8 px-4">
+            <div className="pt-24 sm:pt-28 pb-8 px-4">
             <div className="max-w-2xl mx-auto">
                 {/* Breadcrumb */}
                 <nav className="mb-4 text-sm text-gray-500">

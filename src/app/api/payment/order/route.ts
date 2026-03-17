@@ -14,23 +14,20 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         const { amount, currency = "INR", description, metadata = {} } = body;
 
-        if (!amount) {
-            return NextResponse.json({ error: "Amount is required" }, { status: 400 });
+        const parsedAmount = Number(amount);
+        if (!amount || isNaN(parsedAmount) || parsedAmount <= 0) {
+            return NextResponse.json({ error: "A valid positive amount is required" }, { status: 400 });
+        }
+        // Guard against accidental overcharges — max 1,00,000 INR per order
+        if (parsedAmount > 100000) {
+            return NextResponse.json({ error: "Amount exceeds maximum allowed limit" }, { status: 400 });
         }
 
         // Initialize Razorpay
         const { instance, keyId } = await getRazorpayClient();
 
-        // Create Order
-        // Amount should be in paise (100 paise = 1 INR)
-        // If the input 'amount' is in INR, multiply by 100. 
-        // We'll assume input is in INR for simplicity of API usage, 
-        // OR we enforce input to be in smallest unit. 
-        // Let's assume input is in INR and convert here to be safe and standard.
-        // Wait, standard for APIs often expects smallest unit, but let's be developer friendly.
-        // NO, standard practice: explicitly document. I will receive amount in INR.
-
-        const amountInPaise = Math.round(Number(amount) * 100);
+        // Amount received in INR, converted to paise (1 INR = 100 paise)
+        const amountInPaise = Math.round(parsedAmount * 100);
 
         const options = {
             amount: amountInPaise,

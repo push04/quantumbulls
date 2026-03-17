@@ -27,12 +27,12 @@ export default async function SessionPage({ params }: PageProps) {
         return (
             <main className="min-h-screen bg-gray-50">
                 <Navbar />
-                <div className="flex items-center justify-center px-4 py-20">
+                <div className="flex items-center justify-center px-4 pt-24 sm:pt-28 pb-20">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in Required</h1>
                     <p className="text-gray-600 mb-6">Please sign in to access live sessions</p>
                     <Link
-                        href="/auth/login"
+                        href={`/signin?redirect=/live/${sessionId}`}
                         className="px-6 py-3 bg-[#2EBD59] text-white font-medium rounded-lg"
                     >
                         Sign In
@@ -64,7 +64,7 @@ export default async function SessionPage({ params }: PageProps) {
         return (
             <main className="min-h-screen bg-gray-50">
                 <Navbar />
-                <div className="flex items-center justify-center px-4 py-20">
+                <div className="flex items-center justify-center px-4 pt-24 sm:pt-28 pb-20">
                 <div className="text-center max-w-md">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
                         <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@ export default async function SessionPage({ params }: PageProps) {
     return (
         <main className="min-h-screen bg-gray-50">
             <Navbar />
-            <div className="py-6 px-4">
+            <div className="pt-24 sm:pt-28 pb-6 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Breadcrumb */}
                 <nav className="mb-4">

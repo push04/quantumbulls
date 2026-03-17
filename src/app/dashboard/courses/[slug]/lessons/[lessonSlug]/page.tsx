@@ -153,9 +153,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                                     <EnhancedVideoPlayer 
                                         url={lesson.video_url} 
                                         thumbnail={lesson.thumbnail_url || undefined}
-                                        onEnded={() => {
-                                            console.log("Video ended");
-                                        }}
+                                        onEnded={() => {}}
                                     />
                                 ) : (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0F19] text-gray-500">

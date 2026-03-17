@@ -51,12 +51,20 @@ export async function POST(req: NextRequest) {
             // Update user role
             const { error: profileError } = await supabase
                 .from("profiles")
-                .update({ role: metadata.tier })
+                .update({ role: metadata.tier, updated_at: new Date().toISOString() })
                 .eq("id", userId);
 
             if (profileError) {
-                console.error("Error updating profile role:", profileError);
-                // Note: Payment succeeded but fulfillment failed. Should log critical error or retry.
+                console.error("CRITICAL: Payment succeeded but profile role update failed for user", userId, profileError);
+                // Mark the order as paid but with fulfillment_failed flag so admin can retry
+                await supabase
+                    .from("payment_orders")
+                    .update({ status: "fulfillment_failed", updated_at: new Date().toISOString() })
+                    .eq("razorpay_order_id", razorpay_order_id);
+                return NextResponse.json(
+                    { error: "Payment received but account upgrade failed. Please contact support with your order ID: " + razorpay_order_id },
+                    { status: 500 }
+                );
             }
         }
 

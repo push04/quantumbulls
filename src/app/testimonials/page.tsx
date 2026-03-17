@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import Icon from "@/components/ui/Icon";
 import Footer from "@/components/Footer";
@@ -18,7 +19,7 @@ export default async function TestimonialsPage() {
     return (
         <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
             <Navbar />
-            <div className="pt-20 pb-12 px-4 sm:px-6">
+            <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6">
             <div className="max-w-6xl mx-auto text-center">
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What Our Traders Say</h1>
                 <p className="text-lg sm:text-xl text-gray-600 mb-10 sm:mb-12 max-w-2xl mx-auto">
@@ -42,7 +43,7 @@ export default async function TestimonialsPage() {
                             >
                                 <div className="flex items-center gap-4 mb-4 sm:mb-6">
                                     {testimonial.avatar_url ? (
-                                        <img src={testimonial.avatar_url} alt={testimonial.author_name} className="w-12 h-12 rounded-full object-cover" />
+                                        <Image src={testimonial.avatar_url} alt={testimonial.author_name} width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
                                     ) : (
                                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2EBD59] to-emerald-600 flex items-center justify-center text-white font-bold text-lg">
                                             {testimonial.author_name.charAt(0)}

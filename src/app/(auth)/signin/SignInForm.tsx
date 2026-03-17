@@ -71,7 +71,10 @@ export default function SignInForm() {
                 }
 
                 const redirectParam = searchParams.get("redirect");
-                let redirectTo = redirectParam || "/dashboard";
+                // Validate redirect to prevent open-redirect attacks
+                const safeRedirect = redirectParam && redirectParam.startsWith("/") && !redirectParam.startsWith("//")
+                    ? redirectParam : "/dashboard";
+                let redirectTo = safeRedirect;
                 
                 // Check if user is admin and redirect to admin dashboard
                 const { data: profile } = await supabase

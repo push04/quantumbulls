@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import SessionGuard from "@/components/SessionGuard";
@@ -81,7 +82,7 @@ export default function DashboardClient({ user, profile }: DashboardClientProps)
                 >
                     <div className="p-6 border-b border-slate-50 flex items-center justify-between">
                         <Link href="/" className="flex items-center gap-2">
-                            <img src="/logo.svg" alt="Quantum Bull" className="h-8 w-auto" />
+                            <Image src="/logo.svg" alt="Quantum Bull" width={100} height={32} className="h-8 w-auto" />
                             <span className="font-bold text-lg tracking-tight text-slate-900">QUANTUM <span className="text-emerald-500">BULL</span></span>
                         </Link>
                         <button onClick={() => setSidebarOpen(false)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">

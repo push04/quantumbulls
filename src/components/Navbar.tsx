@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Icon from "@/components/ui/Icon";
@@ -66,6 +67,7 @@ export default function Navbar() {
         { name: "Community", href: "/community" },
         { name: "Analysis", href: "/analysis" },
         { name: "Pricing", href: "/pricing" },
+        { name: "Market News", href: "/news" },
     ];
 
     return (
@@ -73,7 +75,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-24 sm:h-28">
                     <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-                        <img src="/logo.svg" alt="Quantum Bull" className="h-22 sm:h-26 w-auto" />
+                        <Image src="/logo.svg" alt="Quantum Bull" width={160} height={48} className="h-12 sm:h-14 w-auto" priority />
                     </Link>
 
                     <div className="hidden md:flex items-center gap-1">

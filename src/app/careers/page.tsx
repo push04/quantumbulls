@@ -17,7 +17,7 @@ export default function CareersPage() {
     return (
         <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
             <Navbar />
-            <div className="pt-20 pb-12 px-4 sm:px-6">
+            <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6">
             <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Join Our Team</h1>
                 <p className="text-lg text-gray-700 mb-8 sm:mb-10">

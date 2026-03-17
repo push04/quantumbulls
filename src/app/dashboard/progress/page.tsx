@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -134,7 +135,7 @@ export default async function ProgressPage() {
                             <Link key={course.id} href={`/dashboard/courses/${course.slug}`} className="group relative block bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1">
                                 <div className="h-40 bg-gray-200 relative overflow-hidden">
                                     {course.thumbnail_url ? (
-                                        <img src={course.thumbnail_url} alt={course.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <Image src={course.thumbnail_url} alt={course.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-3xl bg-gray-800 text-white/20">📚</div>
                                     )}
@@ -182,7 +183,7 @@ function CourseProgressCard({ course, completed = false }: { course: Course, com
         <Link href={`/dashboard/courses/${course.slug}`} className="group block bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1">
             <div className="h-48 relative overflow-hidden bg-gray-900">
                 {course.thumbnail_url ? (
-                    <img src={course.thumbnail_url} alt={course.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" />
+                    <Image src={course.thumbnail_url} alt={course.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-4xl text-white/20">📚</div>
                 )}

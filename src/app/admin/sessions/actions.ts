@@ -4,8 +4,17 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createSession(formData: FormData) {
+async function requireAdmin() {
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin" && profile?.role !== "superadmin") throw new Error("Forbidden");
+    return { supabase, user };
+}
+
+export async function createSession(formData: FormData) {
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
@@ -31,7 +40,7 @@ export async function createSession(formData: FormData) {
 }
 
 export async function updateSession(id: string, formData: FormData) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
@@ -56,7 +65,7 @@ export async function updateSession(id: string, formData: FormData) {
 }
 
 export async function deleteSession(id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const { error } = await supabase.from("live_sessions").delete().eq("id", id);
 
@@ -67,7 +76,7 @@ export async function deleteSession(id: string) {
 }
 
 export async function startSession(id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const { error } = await supabase.from("live_sessions").update({
         status: 'live',
@@ -80,7 +89,7 @@ export async function startSession(id: string) {
 }
 
 export async function endSession(id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const { error } = await supabase.from("live_sessions").update({
         status: 'ended',

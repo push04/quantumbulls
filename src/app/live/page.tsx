@@ -12,7 +12,7 @@ export default function LivePage() {
     return (
         <main className="min-h-screen bg-gray-50">
             <Navbar />
-            <div className="py-8 px-4">
+            <div className="pt-24 sm:pt-28 pb-8 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">

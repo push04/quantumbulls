@@ -156,7 +156,7 @@ export default function CustomVideoPlayer({ url, thumbnail, onEnded, onDuration,
                     console.error("Video Player Error:", e);
                     setError("Failed to load video");
                 }}
-                onReady={() => console.log("Video Player Ready")}
+                onReady={() => {}}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
 

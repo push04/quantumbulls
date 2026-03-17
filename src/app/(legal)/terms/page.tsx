@@ -11,7 +11,7 @@ export default function TermsPage() {
     return (
         <main className="min-h-screen bg-gray-50">
             <Navbar />
-            <div className="py-12 px-4">
+            <div className="pt-24 sm:pt-28 pb-12 px-4">
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-12">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Service</h1>
                 <p className="text-gray-500 mb-8">Last updated: February 2026</p>

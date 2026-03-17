@@ -75,10 +75,10 @@ export default async function AdminPlansPage() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Interval</label>
-                            <select name="interval" className="w-full px-3 py-2 border border-gray-200 rounded-lg">
+                            <select name="interval" defaultValue="month" className="w-full px-3 py-2 border border-gray-200 rounded-lg">
                                 <option value="day">Daily</option>
                                 <option value="week">Weekly</option>
-                                <option value="month" selected>Monthly</option>
+                                <option value="month">Monthly</option>
                                 <option value="year">Yearly</option>
                                 <option value="lifetime">Lifetime</option>
                             </select>

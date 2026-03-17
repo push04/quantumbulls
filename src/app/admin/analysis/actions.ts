@@ -4,8 +4,20 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createAnalysis(formData: FormData) {
+async function requireAdmin() {
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin" && profile?.role !== "superadmin") throw new Error("Forbidden");
+    return { supabase, user };
+}
+
+export async function createAnalysis(formData: FormData) {
+    const { supabase, user } = await requireAdmin().catch(() => {
+        redirect("/signin");
+        return { supabase: null as never, user: null as never };
+    });
 
     const title = formData.get("title") as string;
     const summary = formData.get("summary") as string;
@@ -15,9 +27,6 @@ export async function createAnalysis(formData: FormData) {
 
     if (!title) return { error: "Title is required" };
     if (!content) return { error: "Content is required" };
-
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return { error: "Unauthorized" };
 
     const { error } = await supabase.from("market_analysis").insert({
         title,
@@ -37,7 +46,7 @@ export async function createAnalysis(formData: FormData) {
 }
 
 export async function updateAnalysis(id: string, formData: FormData) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const title = formData.get("title") as string;
     const summary = formData.get("summary") as string;
@@ -61,7 +70,7 @@ export async function updateAnalysis(id: string, formData: FormData) {
 }
 
 export async function deleteAnalysis(id: string) {
-    const supabase = await createClient();
+    const { supabase } = await requireAdmin().catch(() => { redirect("/signin"); return { supabase: null as never, user: null as never }; });
 
     const { error } = await supabase.from("market_analysis").delete().eq("id", id);
 

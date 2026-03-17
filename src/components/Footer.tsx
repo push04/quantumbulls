@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Icon from "@/components/ui/Icon";
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -70,7 +71,7 @@ export default function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
                     <div className="col-span-2 lg:col-span-2">
                         <Link href="/" className="inline-block mb-5">
-                            <img src="/logo.svg" alt="Quantum Bull" className="h-10 w-auto" />
+                            <Image src="/logo.svg" alt="Quantum Bull" width={140} height={40} className="h-10 w-auto" />
                         </Link>
                         <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-sm">
                             Empowering traders with expert education, real-time analysis, and a supportive community.
