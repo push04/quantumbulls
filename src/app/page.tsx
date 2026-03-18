@@ -2,6 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import CoursePreview from "@/components/CoursePreview";
+import HomeTestimonials from "@/components/home/HomeTestimonials";
+import KnowYourMentor from "@/components/home/KnowYourMentor";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/server";
 
@@ -29,6 +31,8 @@ export default async function Home() {
       <Hero stats={stats} />
       <Features />
       <CoursePreview plans={plansResult.data || []} user={user} />
+      <KnowYourMentor />
+      <HomeTestimonials />
       <Footer />
     </main>
   );

@@ -68,6 +68,7 @@ export default function Navbar() {
         { name: "Analysis", href: "/analysis" },
         { name: "Pricing", href: "/pricing" },
         { name: "Market News", href: "/news" },
+        { name: "Calendar", href: "/calendar" },
     ];
 
     return (
