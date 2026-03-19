@@ -13,7 +13,7 @@ export default function CalendarPage() {
         <main className="min-h-screen bg-gray-50">
             <Navbar />
             <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto pt-8">
                     {/* Header */}
                     <div className="mb-8">
                         <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">

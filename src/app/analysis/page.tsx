@@ -22,7 +22,7 @@ export default async function AnalysisPage() {
         <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
             <Navbar />
             <div className="pt-24 sm:pt-28 pb-12 px-4 sm:px-6 flex-1 flex flex-col">
-            <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
+            <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col pt-8">
                 <div className="text-center mb-10 sm:mb-12">
                     <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Market Analysis</h1>
                     <p className="text-lg sm:text-xl text-gray-600">
