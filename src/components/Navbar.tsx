@@ -89,6 +89,8 @@ export default function Navbar() {
 
     const navItems: NavItemConfig[] = [
         { name: "Home", href: "/" },
+        { name: "News", href: "/news" },
+        { name: "Analysis", href: "/analysis" },
         {
             name: "Courses",
             href: "/courses",
@@ -97,6 +99,7 @@ export default function Navbar() {
                 { name: "Careers", href: "/careers", description: "Join our team" },
             ],
         },
+        { name: "Calendar", href: "/calendar" },
         {
             name: "Community",
             href: "/community",
@@ -105,9 +108,6 @@ export default function Navbar() {
                 { name: "Market News", href: "/news", description: "Latest market updates" },
             ],
         },
-        { name: "Analysis", href: "/analysis" },
-        { name: "Pricing", href: "/pricing" },
-        { name: "Calendar", href: "/calendar" },
     ];
 
     return (

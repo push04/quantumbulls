@@ -230,7 +230,7 @@ export function ThreadDetail({ threadId, userId, isAuthor, isAdmin }: ThreadDeta
                     </div>
                 ) : (
                     <div className="bg-gray-50 rounded-xl p-4 text-center">
-                        <Link href="/auth/login" className="text-[#2EBD59] hover:underline">
+                        <Link href="/signin" className="text-[#2EBD59] hover:underline">
                             Sign in to reply
                         </Link>
                     </div>

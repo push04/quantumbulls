@@ -1,5 +1,4 @@
 import { ThreadDetail } from "@/components/forum";
-import { getThread } from "@/lib/community";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -13,9 +12,15 @@ export default async function ThreadPage({ params }: PageProps) {
     const { threadId } = await params;
     const supabase = await createClient();
 
-    // Get thread
-    const thread = await getThread(threadId);
-    if (!thread) {
+    // Get thread using server client (avoids browser-client crash in server component)
+    const { data: thread, error: threadError } = await supabase
+        .from("forum_threads")
+        .select("author_id")
+        .eq("id", threadId)
+        .eq("is_deleted", false)
+        .single();
+
+    if (threadError || !thread) {
         notFound();
     }
 

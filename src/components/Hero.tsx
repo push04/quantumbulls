@@ -40,7 +40,7 @@ export default function Hero({ stats }: { stats?: { courses: number; traders: nu
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#2EBD59]/5 to-transparent" />
             </div>
 
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 sm:pb-24 lg:pb-32">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 sm:pt-44 pb-16 sm:pb-24 lg:pb-32">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Left Content */}
                     <div className="text-center lg:text-left">
