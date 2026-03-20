@@ -10,7 +10,7 @@ export default function RefundPage() {
         <main className="min-h-screen bg-white">
             <Navbar />
             <div className="pt-24 sm:pt-28 pb-12 px-4">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto pt-8">
                 <h1 className="text-4xl font-bold mb-6">Refund Policy</h1>
                 <p className="mb-4">
                     Our refund policy provides a 7-day money-back guarantee for all course purchases if you have completed less than 20% of the content.

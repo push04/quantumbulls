@@ -48,12 +48,22 @@ export default async function CoursesPage() {
                                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col animate-fade-in"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
-                                <div className="h-48 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white relative overflow-hidden">
+                                <div className="h-48 relative bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white overflow-hidden">
                                     {course.thumbnail_url ? (
                                         <Image src={course.thumbnail_url} alt={course.title} fill className="object-cover" />
                                     ) : (
-                                        <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center">
-                                            <Icon name="book" size={32} className="text-white" />
+                                        <div className={`absolute inset-0 flex flex-col items-center justify-center gap-2 ${
+                                            course.difficulty === 'beginner'
+                                                ? 'bg-gradient-to-br from-blue-400 to-blue-600'
+                                                : course.difficulty === 'intermediate'
+                                                    ? 'bg-gradient-to-br from-emerald-400 to-emerald-600'
+                                                    : 'bg-gradient-to-br from-purple-400 to-purple-600'
+                                        }`}>
+                                            <svg className="w-12 h-12 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                            </svg>
+                                            <span className="text-white/60 text-sm font-medium">Course</span>
                                         </div>
                                     )}
                                 </div>

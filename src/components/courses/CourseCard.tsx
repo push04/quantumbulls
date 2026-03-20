@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 interface CourseCardProps {
     id: string;
@@ -30,8 +32,16 @@ const DIFFICULTY_COLORS = {
     advanced: 'text-red-600',
 };
 
+// Branded gradient fallback colors per tier
+const TIER_GRADIENTS = {
+    free: 'from-slate-400 to-slate-600',
+    basic: 'from-blue-400 to-blue-600',
+    medium: 'from-purple-400 to-purple-600',
+    pro: 'from-amber-400 to-orange-500',
+};
+
 /**
- * Course Card with progress bar
+ * Course Card with progress bar and reliable image/fallback rendering
  */
 export default function CourseCard({
     id,
@@ -47,11 +57,15 @@ export default function CourseCard({
     isLocked = false,
     userTier,
 }: CourseCardProps) {
+    const [imgError, setImgError] = useState(false);
+
     const progressPercent = totalLessons > 0
         ? Math.round((completedLessons / totalLessons) * 100)
         : 0;
     const isCompleted = progressPercent === 100;
     const isStarted = completedLessons > 0;
+
+    const showImage = !!thumbnail_url && !imgError;
 
     return (
         <Link
@@ -63,10 +77,25 @@ export default function CourseCard({
         >
             {/* Thumbnail */}
             <div className="relative aspect-video bg-gray-100">
-                <div
-                    className="w-full h-full bg-cover bg-center"
-                    style={{ backgroundImage: `url(${thumbnail_url || '/placeholder-course.jpg'})` }}
-                />
+                {showImage ? (
+                    <Image
+                        src={thumbnail_url!}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                        onError={() => setImgError(true)}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                ) : (
+                    /* Branded gradient fallback — never shows a broken image */
+                    <div className={`w-full h-full bg-gradient-to-br ${TIER_GRADIENTS[tier]} flex flex-col items-center justify-center gap-2`}>
+                        <svg className="w-10 h-10 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span className="text-white/60 text-xs font-medium">Course</span>
+                    </div>
+                )}
 
                 {/* Tier badge */}
                 <div className={`absolute top-3 left-3 px-2 py-1 rounded-lg text-xs font-semibold ${TIER_COLORS[tier]}`}>

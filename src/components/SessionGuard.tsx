@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -11,7 +11,8 @@ interface SessionGuardProps {
 
 export default function SessionGuard({ children, userId }: SessionGuardProps) {
     const router = useRouter();
-    const supabase = createClient();
+    // Stabilize supabase client so it doesn't change on every render
+    const supabase = useMemo(() => createClient(), []);
     const [isValid, setIsValid] = useState(true);
     const [showWarning, setShowWarning] = useState(false);
     const hasValidatedRef = useRef(false);

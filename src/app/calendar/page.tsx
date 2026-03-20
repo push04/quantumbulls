@@ -29,23 +29,26 @@ export default function CalendarPage() {
                         </p>
                     </div>
 
-                    {/* Tier legend */}
-                    <div className="flex flex-wrap gap-3 mb-8">
-                        {[
-                            { tier: "Free", color: "bg-gray-500", text: "text-gray-700", bg: "bg-gray-50 border-gray-200" },
-                            { tier: "Basic", color: "bg-blue-500", text: "text-blue-700", bg: "bg-blue-50 border-blue-200" },
-                            { tier: "Medium", color: "bg-purple-500", text: "text-purple-700", bg: "bg-purple-50 border-purple-200" },
-                            { tier: "Advanced", color: "bg-amber-500", text: "text-amber-700", bg: "bg-amber-50 border-amber-200" },
-                        ].map(({ tier, color, text, bg }) => (
-                            <span
-                                key={tier}
-                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium ${bg} ${text}`}
-                            >
-                                <span className={`w-2.5 h-2.5 rounded-full ${color}`} />
-                                {tier} Plan
-                            </span>
-                        ))}
+                    {/* Market Status Legend */}
+                    <div className="flex flex-wrap items-center gap-4 mb-8">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 border border-green-200">
+                            <span className="text-sm">🟢</span>
+                            <span className="text-xs font-medium text-green-700">Market Open</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-200">
+                            <span className="text-sm">🔴</span>
+                            <span className="text-xs font-medium text-red-600">NSE Holiday / Weekend</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-200">
+                            <span className="w-3 h-3 rounded-sm bg-red-100 border border-red-300 inline-block" />
+                            <span className="text-xs font-medium text-red-600">Holiday</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-200">
+                            <span className="w-3 h-3 rounded-sm bg-orange-100 border border-orange-300 inline-block" />
+                            <span className="text-xs font-medium text-orange-600">Weekend</span>
+                        </div>
                     </div>
+
 
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
                         {/* Full Calendar */}

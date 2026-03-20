@@ -20,12 +20,19 @@ interface Profile {
     enrolled_date: string;
 }
 
+interface StatsData {
+    completedLessons: number;
+    watchHours: number;
+    enrolledCourses: number;
+}
+
 interface DashboardClientProps {
     user: User;
     profile: Profile | null;
+    stats?: StatsData;
 }
 
-export default function DashboardClient({ user, profile }: DashboardClientProps) {
+export default function DashboardClient({ user, profile, stats }: DashboardClientProps) {
     const router = useRouter();
     const supabase = createClient();
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -179,9 +186,9 @@ export default function DashboardClient({ user, profile }: DashboardClientProps)
 
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             {[
-                                { label: "Courses Enrolled", value: "0", icon: "book" as const, color: "blue", bg: "bg-blue-50", iconBg: "bg-blue-100" },
-                                { label: "Lessons Completed", value: "0", icon: "check" as const, color: "emerald", bg: "bg-emerald-50", iconBg: "bg-emerald-100" },
-                                { label: "Total Watch Time", value: "0h", icon: "clock" as const, color: "violet", bg: "bg-violet-50", iconBg: "bg-violet-100" },
+                                { label: "Courses Enrolled", value: String(stats?.enrolledCourses ?? 0), icon: "book" as const, color: "blue", bg: "bg-blue-50", iconBg: "bg-blue-100" },
+                                { label: "Lessons Completed", value: String(stats?.completedLessons ?? 0), icon: "check" as const, color: "emerald", bg: "bg-emerald-50", iconBg: "bg-emerald-100" },
+                                { label: "Total Watch Time", value: `${stats?.watchHours ?? 0}h`, icon: "clock" as const, color: "violet", bg: "bg-violet-50", iconBg: "bg-violet-100" },
                                 { label: "Certificates", value: "0", icon: "award" as const, color: "amber", bg: "bg-amber-50", iconBg: "bg-amber-100" },
                             ].map((stat, i) => (
                                 <div key={i} className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
