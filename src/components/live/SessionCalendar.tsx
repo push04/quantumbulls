@@ -282,17 +282,6 @@ export default function SessionCalendar() {
 
             {/* Legend */}
             <div className="p-4 border-t border-gray-200 flex flex-wrap gap-x-5 gap-y-2 items-center">
-                {/* Session tier legend */}
-                {Object.entries(tierColors).map(([tier, color]) => (
-                    <div key={tier} className="flex items-center gap-1.5">
-                        <div className={`w-3 h-3 rounded-full ${color}`} />
-                        <span className="text-xs text-gray-500 capitalize">{tier}</span>
-                    </div>
-                ))}
-
-                {/* Divider */}
-                <div className="w-px h-4 bg-gray-200 mx-1" />
-
                 {/* Market status legend */}
                 <div className="flex items-center gap-1.5">
                     <span className="text-sm">🟢</span>
